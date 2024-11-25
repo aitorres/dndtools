@@ -21,3 +21,23 @@ export async function getSpell(slug: string) {
         throw error;
     }
 }
+
+export async function getWeapons() {
+    try {
+        const response = await axios.get('https://www.dnd5eapi.co/api/equipment-categories/weapon');
+        return response.data.equipment;
+    } catch (error) {
+        console.error('Error fetching weapons:', error);
+        throw error;
+    }
+}
+
+export async function getWeapon(slug: string) {
+    try {
+        const response = await axios.get(`https://www.dnd5eapi.co/api/equipment/${slug}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching weapon:', error);
+        throw error;
+    }
+}
