@@ -42,7 +42,15 @@
 
 	<ul>
 		{#each results as result}
-			<li>{result}</li>
+			<li>
+				{result}
+				{#if result === selectedDice}
+					(critical success!)
+				{/if}
+				{#if result === 1}
+					(critical failure...)
+				{/if}
+			</li>
 		{/each}
 	</ul>
 
