@@ -1,22 +1,16 @@
-# sv
+# DnD Tools
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+![Screenshot of the app's homepage](./docs/image.png)
 
-## Creating a project
+**DnD Tools** is a collection of simple tools for Dungeons and Dragons DMs and players, built as a web application using Svelte.
 
-If you're seeing this, you've probably already done this step. Congrats!
+You can access the project [here: DnD Tools](https://dndtools.aitorres.com/) and read more about it [here](https://aitorres.com/projects/dnd-tools/)
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Installation
 
-# create a new project in my-app
-npx sv create my-app
-```
+If you want to install the web application locally, you will need `npm`.
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Clone the repository, then run the following to start a development server:
 
 ```bash
 npm run dev
@@ -25,9 +19,9 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+## Deployment
 
-To create a production version of your app:
+Since the app is a static website, you can run the following `npm` command to build the project.
 
 ```bash
 npm run build
@@ -35,4 +29,9 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Then, just copy the contents of the `build` folder to an appropriate web hosting.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
