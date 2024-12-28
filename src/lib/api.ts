@@ -16,7 +16,7 @@ export type Spell = {
 	duration: string;
 	range: string;
 	desc: string[];
-}
+};
 
 // Weapon stub containing the basic information for the dropdown
 export type WeaponStub = { index: string; name: string };
@@ -26,13 +26,13 @@ export type WeaponProperty = {
 	index: string;
 	name: string;
 	url: string;
-}
+};
 
 // Weapon damage contains the full information for a weapon damage reference
 export type WeaponDamage = {
 	damage_dice: string;
 	damage_type: { name: string };
-}
+};
 
 // Weapon contains the full information for a weapon reference
 export type Weapon = {
@@ -40,7 +40,7 @@ export type Weapon = {
 	damage: WeaponDamage;
 	weapon_range: string;
 	properties: WeaponProperty[];
-}
+};
 
 /*
  * Fetch all spells from the D&D 5e API

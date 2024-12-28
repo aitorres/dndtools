@@ -43,14 +43,18 @@
 
 		autoTable(doc, {
 			head: [['Spell', 'Level', 'Duration', 'Range', 'Description']],
-			body: await Promise.all(selectedSpells.map((spell) => getFullSpell(spell.index))).then((results) => results.filter((result) => result !== null))
+			body: await Promise.all(selectedSpells.map((spell) => getFullSpell(spell.index))).then(
+				(results) => results.filter((result) => result !== null)
+			)
 		});
 
 		doc.save('selected_spells.pdf');
 	}
 
 	// Get the full information of a spell
-	async function getFullSpell(index: string): Promise<[string, number, string, string, string] | null> {
+	async function getFullSpell(
+		index: string
+	): Promise<[string, number, string, string, string] | null> {
 		var spell: Spell;
 
 		try {
