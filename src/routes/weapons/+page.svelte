@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getWeapons, getWeapon } from '$lib/api';
+	import { getWeapons, getWeapon, type WeaponStub, type Weapon } from '$lib/api';
 	import jsPDF from 'jspdf';
 	import autoTable from 'jspdf-autotable';
 
-	type Weapon = { index: string; name: string };
-	let weapons: Weapon[] = [];
-	let selectedWeapons: Weapon[] = [];
+	let weapons: WeaponStub[] = [];
+	let selectedWeapons: WeaponStub[] = [];
 
 	onMount(async () => {
 		weapons = await getWeapons();
 	});
 
-	function addWeapon() {
+	// Add a weapon to the selected weapons list
+	function addWeapon(): void {
 		const selectElement = document.getElementById('weapon') as HTMLSelectElement;
 		const selectedIndex = selectElement.value;
 		const selectedWeapon = weapons.find((weapon) => weapon.index === selectedIndex);
@@ -23,13 +23,15 @@
 		selectElement.value = '';
 	}
 
-	function removeWeapon() {
+	// Remove a weapon from the selected weapons list
+	function removeWeapon(): void {
 		const selectElement = document.getElementById('weapon') as HTMLSelectElement;
 		const selectedIndex = selectElement.value;
 		selectedWeapons = selectedWeapons.filter((weapon) => weapon.index !== selectedIndex);
 	}
 
-	async function generatePDF() {
+	// Generate a PDF with the selected weapons
+	async function generatePDF(): Promise<void> {
 		const doc = new jsPDF();
 
 		selectedWeapons.sort((a, b) => {
@@ -46,10 +48,12 @@
 		doc.save('selected_weapons.pdf');
 	}
 
+	// Get the full information of a weapon
 	async function getFullWeapon(
 		index: string
 	): Promise<[string, string, string, string, string] | null> {
-		var weapon;
+		var weapon: Weapon;
+
 		try {
 			weapon = await getWeapon(index);
 		} catch (error) {
@@ -57,15 +61,12 @@
 			return null;
 		}
 
-		const properties: { index: string; name: string; url: string }[] = weapon.properties;
-		const propertyNames = properties.map((property) => property.name).join(', ');
-
 		return [
 			weapon.name,
 			weapon.damage.damage_dice,
 			weapon.damage.damage_type.name,
 			weapon.weapon_range,
-			propertyNames
+			weapon.properties.map((property) => property.name).join(', ')
 		];
 	}
 </script>

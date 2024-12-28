@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getSpells, getSpell } from '$lib/api';
+	import { getSpells, getSpell, type SpellStub, type Spell } from '$lib/api';
 	import jsPDF from 'jspdf';
 	import autoTable from 'jspdf-autotable';
 
-	type Spell = { index: string; name: string; level: number };
-	let spells: Spell[] = [];
-	let selectedSpells: Spell[] = [];
+	let spells: SpellStub[] = [];
+	let selectedSpells: SpellStub[] = [];
 
 	onMount(async () => {
 		spells = await getSpells();
 	});
 
-	function addSpell() {
+	// Add a spell to the selected spells list
+	function addSpell(): void {
 		const selectElement = document.getElementById('spell') as HTMLSelectElement;
 		const selectedIndex = selectElement.value;
 		const selectedSpell = spells.find((spell) => spell.index === selectedIndex);
@@ -23,13 +23,15 @@
 		selectElement.value = '';
 	}
 
-	function removeSpell() {
+	// Remove a spell from the selected spells list
+	function removeSpell(): void {
 		const selectElement = document.getElementById('spell') as HTMLSelectElement;
 		const selectedIndex = selectElement.value;
 		selectedSpells = selectedSpells.filter((spell) => spell.index !== selectedIndex);
 	}
 
-	async function generatePDF() {
+	// Generate a PDF with the selected spells
+	async function generatePDF(): Promise<void> {
 		const doc = new jsPDF();
 
 		selectedSpells.sort((a, b) => {
@@ -41,14 +43,22 @@
 
 		autoTable(doc, {
 			head: [['Spell', 'Level', 'Duration', 'Range', 'Description']],
-			body: await Promise.all(selectedSpells.map((spell) => getFullSpell(spell.index)))
+			body: await Promise.all(selectedSpells.map((spell) => getFullSpell(spell.index))).then((results) => results.filter((result) => result !== null))
 		});
 
 		doc.save('selected_spells.pdf');
 	}
 
-	async function getFullSpell(index: string): Promise<[string, number, string, string, string]> {
-		const spell = await getSpell(index);
+	// Get the full information of a spell
+	async function getFullSpell(index: string): Promise<[string, number, string, string, string] | null> {
+		var spell: Spell;
+
+		try {
+			spell = await getSpell(index);
+		} catch (error) {
+			console.error(error);
+			return null;
+		}
 
 		return [spell.name, spell.level, spell.duration, spell.range, spell.desc.join('\n')];
 	}
