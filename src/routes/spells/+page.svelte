@@ -79,7 +79,7 @@
 	<label for="spell">Select a spell:</label>
 	<input list="spells" id="spell" name="spell" />
 	<datalist id="spells">
-		{#each spells as spell}
+		{#each spells as spell (spell.index)}
 			<option value={spell.index}>{spell.name}</option>
 		{/each}
 	</datalist>
@@ -89,7 +89,7 @@
 	<h3>Selected spells</h3>
 	{#if selectedSpells.length > 0}
 		<ul>
-			{#each selectedSpells as spell}
+			{#each selectedSpells as spell (spell.index)}
 				<li>{spell.name} (Level {spell.level})</li>
 			{/each}
 		</ul>

@@ -82,7 +82,7 @@
 	<label for="weapon">Select a weapon:</label>
 	<input list="weapons" id="weapon" name="weapon" />
 	<datalist id="weapons">
-		{#each weapons as weapon}
+		{#each weapons as weapon (weapon.index)}
 			<option value={weapon.index}>{weapon.name}</option>
 		{/each}
 	</datalist>
@@ -92,7 +92,7 @@
 	<h3>Selected weapons</h3>
 	{#if selectedWeapons.length > 0}
 		<ul>
-			{#each selectedWeapons as weapon}
+			{#each selectedWeapons as weapon (weapon.index)}
 				<li>{weapon.name}</li>
 			{/each}
 		</ul>

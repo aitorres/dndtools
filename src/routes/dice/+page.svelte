@@ -23,7 +23,7 @@
 <form>
 	<label for="dice">Select a dice type:</label>
 	<select id="dice" name="dice" bind:value={selectedDice}>
-		{#each dice as die}
+		{#each dice as die (die)}
 			<option value={die}>{die}</option>
 		{/each}
 	</select>
@@ -41,7 +41,7 @@
 	</p>
 
 	<ul>
-		{#each results as result}
+		{#each results as result, index (index)}
 			<li>
 				{result}
 				{#if result === selectedDice}
