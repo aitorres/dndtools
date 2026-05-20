@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import { getWeapons, getWeapon, type WeaponStub, type Weapon } from '$lib/api';
 	import jsPDF from 'jspdf';
@@ -105,4 +106,4 @@
 	{/if}
 </form>
 
-<a href="/" class="back-link">&lt; home</a>
+<a href={resolve('/')} class="back-link">&lt; home</a>

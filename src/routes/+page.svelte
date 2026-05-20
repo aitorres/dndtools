@@ -1,3 +1,7 @@
+<script>
+	import { resolve } from '$app/paths';
+</script>
+
 <p>
 	A list of small tools and utilities for Dungeons and Dragons dungeon masters and players,
 	including a dice roller and several printable reference sheet generators, leveraging the <a
@@ -8,19 +12,19 @@
 
 <div class="cards">
 	<div class="card">
-		<a href="/dice">
+		<a href={resolve('/dice')}>
 			<h3>Dice Roller</h3>
 		</a>
 	</div>
 
 	<div class="card">
-		<a href="/spells">
+		<a href={resolve('/spells')}>
 			<h3>Printable Spell List</h3>
 		</a>
 	</div>
 
 	<div class="card">
-		<a href="/weapons">
+		<a href={resolve('/weapons')}>
 			<h3>Printable Weapon List</h3>
 		</a>
 	</div>
