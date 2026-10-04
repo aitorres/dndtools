@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-
 	let dice = [4, 6, 8, 10, 12, 20, 100];
 	let selectedDice = 20;
 	let quantity = 1;
@@ -69,4 +67,4 @@
 	{/if}
 {/if}
 
-<a href={resolve('/')} class="back-link">&lt; home</a>
+<a href="/" class="back-link">&lt; home</a>

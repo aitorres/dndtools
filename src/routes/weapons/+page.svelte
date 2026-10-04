@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
-	import { getWeapons, getWeapon, type WeaponStub, type Weapon } from '$lib/api';
+	import { getWeapons, getWeapon, type WeaponStub, type Weapon } from '#lib/api';
 	import jsPDF from 'jspdf';
 	import autoTable from 'jspdf-autotable';
 
@@ -67,7 +66,7 @@
 			weapon.damage.damage_dice,
 			weapon.damage.damage_type.name,
 			weapon.weapon_range,
-			weapon.properties.map((property) => property.name).join(', ')
+			weapon.properties.map((property: { name: string }) => property.name).join(', ')
 		];
 	}
 </script>
@@ -106,4 +105,4 @@
 	{/if}
 </form>
 
-<a href={resolve('/')} class="back-link">&lt; home</a>
+<a href="/" class="back-link">&lt; home</a>

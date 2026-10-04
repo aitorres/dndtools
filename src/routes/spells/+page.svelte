@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
-	import { getSpells, getSpell, type SpellStub, type Spell } from '$lib/api';
+	import { getSpells, getSpell, type SpellStub, type Spell } from '#lib/api';
 	import jsPDF from 'jspdf';
 	import autoTable from 'jspdf-autotable';
 
@@ -103,4 +102,4 @@
 	{/if}
 </form>
 
-<a href={resolve('/')} class="back-link">&lt; home</a>
+<a href="/" class="back-link">&lt; home</a>
